@@ -26,7 +26,7 @@ func FindPayemntById(id, Authorization string) (PAYMENT, error) {
 	json.Unmarshal(body, &payment)
 	return payment, nil
 }
-
+// new
 func GetAllPayments(Authorization string) (PAYMENTS, error) {
 	client := &http.Client{Timeout: time.Second * 10}
 	req, _ := http.NewRequest("GET", "https://api.moyasar.com/v1/payments", nil)
