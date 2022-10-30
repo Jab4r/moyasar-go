@@ -147,3 +147,4 @@ func RefundPayment(id string, amount int, Authorization string) (PAYMENT, error)
 
 // TODO : use the "StatusCode" to verify if id is correct or not
 // ELSE : make better error handling to capture errors
+// create an error struct to get the error json and handle it
