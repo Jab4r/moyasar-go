@@ -26,3 +26,7 @@ type PAYMENT struct {
 	Metadata        interface{} `json:"metadata"` // work it out
 	Source          interface{} `json:"source"`   // this too
 }
+
+type PAYMENTS struct {
+	Payments []PAYMENT `json:"payments"`
+}

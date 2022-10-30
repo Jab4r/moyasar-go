@@ -26,3 +26,23 @@ func FindPayemntById(id, Authorization string) (PAYMENT, error) {
 	json.Unmarshal(body, &payment)
 	return payment, nil
 }
+
+func GetAllPayments(Authorization string) (PAYMENTS, error) {
+	client := &http.Client{Timeout: time.Second * 10}
+	req, _ := http.NewRequest("GET", "https://api.moyasar.com/v1/payments", nil)
+
+	req.Header.Add("Authorization", "Basic "+Authorization)
+
+	res, err := client.Do(req)
+	if err != nil {
+		return PAYMENTS{}, err
+	}
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return PAYMENTS{}, err
+	}
+	var payments PAYMENTS
+	json.Unmarshal(body, &payments)
+	return payments, nil
+}
