@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Will return a payment by its id
 func FindPayemntById(id, Authorization string) (PAYMENT, error) {
 	client := &http.Client{Timeout: time.Second * 10}
 	req, _ := http.NewRequest("GET", "https://api.moyasar.com/v1/payments/"+id, nil)
@@ -26,8 +27,9 @@ func FindPayemntById(id, Authorization string) (PAYMENT, error) {
 	json.Unmarshal(body, &payment)
 	return payment, nil
 }
-// new
-func GetAllPayments(Authorization string) (PAYMENTS, error) {
+
+// Will return an array of payment structs
+func GetAllPayments(Authorization string) ([]PAYMENT, error) {
 	client := &http.Client{Timeout: time.Second * 10}
 	req, _ := http.NewRequest("GET", "https://api.moyasar.com/v1/payments", nil)
 
@@ -35,14 +37,14 @@ func GetAllPayments(Authorization string) (PAYMENTS, error) {
 
 	res, err := client.Do(req)
 	if err != nil {
-		return PAYMENTS{}, err
+		return []PAYMENT{}, err
 	}
 	defer res.Body.Close()
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		return PAYMENTS{}, err
+		return []PAYMENT{}, err
 	}
 	var payments PAYMENTS
 	json.Unmarshal(body, &payments)
-	return payments, nil
+	return payments.Payments, nil
 }
