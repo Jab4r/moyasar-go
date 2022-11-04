@@ -8,6 +8,8 @@ import (
 	"time"
 )
 
+const RefundAll = -1
+
 // Will return a payment by its id
 func FindPayemntById(id, Authorization string) (PAYMENT, error) {
 	client := &http.Client{Timeout: time.Second * 10}
@@ -116,7 +118,7 @@ func VoidPayment(id, Authorization string) (PAYMENT, error) {
 	return payment, nil
 } // on error // payment voided or void time expired
 
-// Will refund the payment partial or full ## put -1 for full refund
+// Will refund the payment partial or full ## put RefundAll for full refund
 func RefundPayment(id string, amount int, Authorization string) (PAYMENT, error) {
 	client := &http.Client{Timeout: time.Second * 10}
 	req, err := http.NewRequest("POST", "https://api.moyasar.com/v1/payments/"+id+"/refund", nil)
