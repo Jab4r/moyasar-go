@@ -87,7 +87,7 @@ fmt.Println(voided.Status) // view its status after void
 ```
 
 ## RefundPayment()
-> to refund the whole payment set the second param as -1 like so RefundPayment("id", -1 ,  Authorization)
+> to refund the whole payment set the second param to "Moyasar.RefundAll" like so RefundPayment("id", Moyasar.RefundAll ,  Authorization)
 ```
 // lets refund part or whole payment
 refundedPayment, err := Moyasar.RefundPayment("1234-1234-1ac34-ca123", 1000, Authorization)
